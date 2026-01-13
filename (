@@ -1,0 +1,17 @@
+import Image from "next/image" 
+ 
+export default function Team() { 
+  const team = [ 
+    { name: "PJ Impey", role: "Principal", description: "Championing opportunities, operational insight, and network growth.", linkedin: "https://www.linkedin.com/in/pj-impey-1bb22556/?skipRedirect=true", image: "/images/PJ.jpeg" }, 
+    { name: "Nicole Morton", role: "CFO", description: "International finance and treasury leadership.", linkedin: "https://www.linkedin.com/in/nicole-morton-41823a74/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3BY8qJLOV5Sdi2%2Fv%2By9CpTyg%3D%3D", image: "/images/Nicole.jpeg" }, 
+    { name: "Krista Saliba", role: "Project Director", description: "Corporate governance lead, portfolio support, and growth enabler.", linkedin: "https://www.linkedin.com/in/krista-saliba-494aa746/", image: "/images/Krista.jpeg" } 
+  ] 
+  return ( 
+    <section className="pt-40 pb-20 md:pb-32 px-6 md:px-12 lg:px-20 bg-neutral-50"> 
+      <div className="max-w-7xl mx-auto"> 
+        <div className="text-center mb-16"> 
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4" style={{ fontFamily: "Playfair Display, Georgia, serif" }}>Our Team</h2> 
+          <div className="h-1 w-24 bg-[#c9a227] mx-auto" /> 
+        </div> 
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12"> 
+          {team.map((member, index

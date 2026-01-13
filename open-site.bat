@@ -1,0 +1,3 @@
+@echo off  
+echo Opening Darius Cubed website in your browser...  
+start "" "public\full-site.html" 
