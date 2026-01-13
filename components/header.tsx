@@ -1,9 +1,14 @@
 "use client"
 
 import Link from "next/link"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
+import { useState } from "react"
 
 export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const navItems = ["Home", "About", "Team", "Portfolio", "Contact"]
+
   return (
     <motion.header
       initial={{ y: -100 }}
@@ -21,8 +26,10 @@ export default function Header() {
             transition={{ duration: 0.3 }}
           />
         </Link>
-        <nav className="flex gap-8">
-          {["Home", "About", "Team", "Portfolio", "Contact"].map((item) => (
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex gap-8">
+          {navItems.map((item) => (
             <motion.div
               key={item}
               whileHover={{ scale: 1.1 }}
@@ -42,7 +49,69 @@ export default function Header() {
             </motion.div>
           ))}
         </nav>
+
+        {/* Mobile Menu Button */}
+        <motion.button
+          className="md:hidden text-white"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          whileTap={{ scale: 0.95 }}
+        >
+          <svg
+            className="w-8 h-8"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            {isMenuOpen ? (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            ) : (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            )}
+          </svg>
+        </motion.button>
       </div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.nav
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden mt-6 overflow-hidden"
+          >
+            <div className="flex flex-col gap-4">
+              {navItems.map((item, index) => (
+                <motion.div
+                  key={item}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <Link
+                    href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                    className="text-white hover:text-neutral-400 transition-colors duration-300 uppercase text-sm block py-2"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item}
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </motion.header>
   )
 }

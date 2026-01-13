@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Header from "./header"
 import { motion } from "framer-motion"
+import Link from "next/link"
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -61,10 +62,33 @@ export default function Hero() {
             </motion.h1>
             <motion.p
               variants={itemVariants}
-              className="text-sm md:text-base leading-relaxed"
+              className="text-sm md:text-base leading-relaxed mb-8"
             >
               A family office at the intersection of venture capital, venture building, and private equity. We don't just invest, we partner deeply with exceptional founders and visionary teams to build enduring companies that transcend market cycles. Our approach combines patient capital with hands on operational expertise, creating lasting value through strategic partnerships and purposeful growth.
             </motion.p>
+            <motion.div
+              variants={itemVariants}
+              className="flex gap-4"
+            >
+              <Link href="/portfolio">
+                <motion.button
+                  whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(255,255,255,0.3)" }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-white text-black px-8 py-3 rounded-md font-medium transition-all duration-300 hover:bg-neutral-200"
+                >
+                  View Portfolio
+                </motion.button>
+              </Link>
+              <Link href="/contact">
+                <motion.button
+                  whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.2)" }}
+                  whileTap={{ scale: 0.95 }}
+                  className="border-2 border-white text-white px-8 py-3 rounded-md font-medium transition-all duration-300 hover:bg-white/10"
+                >
+                  Get in Touch
+                </motion.button>
+              </Link>
+            </motion.div>
           </div>
         </motion.div>
       </div>
